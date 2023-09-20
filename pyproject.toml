@@ -1,0 +1,7 @@
+[project]
+name = 'subliment'
+version = '0.1.0'
+description = 'Fix subtitles by referencing a supplement text'
+
+[dependencies]
+thefuzz = "0.20.0"
