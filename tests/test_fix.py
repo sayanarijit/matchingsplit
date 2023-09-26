@@ -16,7 +16,7 @@ def test_fix2():
         ["this", "must", "be", "a", "good", "thing"], "this is a good thing"
     ) == [
         "this",
-        "",
+        "is",
         "is",
         "a",
         "good",
