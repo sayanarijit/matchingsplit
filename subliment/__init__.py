@@ -23,7 +23,7 @@ def fix(
             if fuzz.ratio(skipped_sub, remaining_ref) > fuzz.ratio(
                 remaining_sub, remaining_ref
             ):
-                result.append(reference[actual_index])
+                result.append(word)
                 continue
 
         for actual_word in reference[actual_index : actual_index + max_neighbours]:
