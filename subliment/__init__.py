@@ -46,8 +46,3 @@ def fix(
         result.append(word.strip())
 
     return result
-
-
-if __name__ == "__main__":
-    # print(fix(["this", "is", "a", "good", "thing"], "this must be a good thing"))
-    print(fix(["this", "must", "be", "a", "good", "thing"], "this is a good thing"))
