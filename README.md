@@ -1,15 +1,15 @@
-## subliment
+## matchingsplit
 
-Fix subtitles by referencing a supplement text.
+Split a string or group a collection of words into a list by matching another list of similar words, to create accurate subtitles from the actual script and inaccurate (generated) subtitles.
 
 Example
 
 ```python
-from subliment import fix
+from matchingsplit import split
 
-fix(["this", "is", "a", "good", "thing"], "this must be a good thing")
-# ["this", "must be", "a", "good", "thing"]
+>>> split("this must be a good thing", reference=["this", "is", "a", "good", "thing"])
+['this', 'must be', 'a', 'good', 'thing']
 
-fix(["this", "must", "be", "a", "good", "thing"], "this is a good thing")
-# ["this", "", "is", "a", "good", "thing"]
+>>> split("this is a good thing", reference=["this", "must", "be", "a", "good", "thing"])
+['this', '', 'is', 'a', 'good', 'thing']
 ```
