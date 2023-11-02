@@ -12,4 +12,7 @@ from matchingsplit import split
 
 >>> split("this is a good thing", reference=["this", "must", "be", "a", "good", "thing"])
 ['this', '', 'is', 'a', 'good', 'thing']
+
+>>> split("a big foo bar", ["a", "big", "ff"])
+['a', 'big', 'foo bar']
 ```

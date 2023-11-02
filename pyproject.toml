@@ -1,6 +1,6 @@
 [project]
 name = 'matchingsplit'
-version = '0.1.0'
+version = '0.1.1'
 description = 'Split a string or group a collection of words into a list by matching another list of similar words, to create accurate subtitles from the actual script and inaccurate (generated) subtitles.'
 readme = 'README.md'
 requires-python = ">=3.10"

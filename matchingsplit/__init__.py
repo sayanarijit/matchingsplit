@@ -18,6 +18,9 @@ def split(
 
         >>> split("this is a good thing", reference=["this", "must", "be", "a", "good", "thing"])
         ['this', '', 'is', 'a', 'good', 'thing']
+
+        >>> split("a big foo bar", ["a", "big", "ff"])
+        ['a', 'big', 'foo bar']
     """
 
     if isinstance(words, str):
@@ -58,5 +61,8 @@ def split(
                 break
 
         result.append(word.strip())
+
+    if result and result[-1] == "":
+        result[-1] = " ".join(words[actual_index:])
 
     return result
