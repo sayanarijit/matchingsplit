@@ -15,4 +15,7 @@ from matchingsplit import split
 
 >>> split("a big foo bar", ["a", "big", "ff"])
 ['a', 'big', 'foo bar']
+
+>>> split("line1.\n\nline2.\nline3.", reference=["1", "2", "3"], preserve_newlines=True)
+['line1.\n\n', 'line2.\n', 'line3.']
 ```
