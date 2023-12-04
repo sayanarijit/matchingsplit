@@ -4,6 +4,7 @@ from thefuzz import fuzz
 def split(
     words: str | list[str],
     reference: list[str],
+    preserve_newlines: bool = False,
     max_neighbours=5,
     match_region=500,
 ) -> list[str]:
@@ -21,10 +22,22 @@ def split(
 
         >>> split("a big foo bar", ["a", "big", "ff"])
         ['a', 'big', 'foo bar']
+
+        >>> split("line1.\\n\\nline2.\\nline3.", reference=["1", "2", "3"], preserve_newlines=True)
+        ['line1.\\n\\n', 'line2.\\n', 'line3.']
     """
 
     if isinstance(words, str):
-        words = words.split()
+        if preserve_newlines:
+            lines = f"{words}\n".splitlines()
+            lines_count = len(lines)
+            words = []
+            for i, line in enumerate(lines):
+                words.extend(line.split())
+                if words and i < lines_count - 1:
+                    words[-1] += "\n"
+        else:
+            words = words.split()
 
     result = []
     actual_index = 0
@@ -43,13 +56,18 @@ def split(
                 result.append(word)
                 continue
 
-        for actual_word in words[actual_index : actual_index + max_neighbours]:
+        for j, actual_word in enumerate(
+            words[actual_index : actual_index + max_neighbours]
+        ):
             if actual_word == reference[i]:
                 word = actual_word
                 actual_index += 1
                 break
 
-            new_word = word + " " + actual_word
+            if j != 0:
+                actual_word = " " + actual_word
+
+            new_word = word + actual_word
             remaining_ref = " ".join(reference[i + 1 : match_region])
             remaining_words = " ".join(words[actual_index + 1 : match_region])
             ratio = fuzz.ratio(remaining_ref, remaining_words)
@@ -60,7 +78,7 @@ def split(
             else:
                 break
 
-        result.append(word.strip())
+        result.append(word)
 
     if result and result[-1] == "":
         result[-1] = " ".join(words[actual_index:])
